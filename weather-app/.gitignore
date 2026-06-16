@@ -1,2 +1,16 @@
+# Chave local do Wrangler (testes) — NUNCA versionar
+.dev.vars
+
+# Config antigo (caso ainda exista) — NUNCA versionar
 js/config.js
+
+# Sistema operacional
 .DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+
+# Dependências e logs
+node_modules/
+*.log

@@ -2,17 +2,16 @@
 
 Aplicação de clima em tempo real que consome a API OpenWeatherMap. Desenvolvida com HTML, CSS e JavaScript puro — sem frameworks, sem dependências.
 
-**[→ Ver demo ao vivo](#)** · **[→ OpenWeatherMap](https://openweathermap.org)**
-
 ---
 
 ## O que o projeto demonstra
 
 - Consumo de **API REST** externa com `fetch` e `async/await`
 - **Tratamento de erros** de rede e respostas HTTP
-- **Separação de responsabilidades** entre módulos JS (`api.js`, `ui.js`, `main.js`)
+- **Separação de responsabilidades** entre módulos (`api.js`, `ui.js`, `main.js`, `config.js`)
+- **Segurança de chave**: chave da API fora do versionamento (`.gitignore`)
 - Manipulação de **DOM** sem jQuery ou frameworks
-- Design responsivo com **CSS puro** (Grid, variáveis CSS, media queries)
+- Design responsivo com **CSS puro**
 - Deploy automático via **Cloudflare Pages + GitHub**
 
 ---
@@ -21,13 +20,16 @@ Aplicação de clima em tempo real que consome a API OpenWeatherMap. Desenvolvid
 
 ```
 weather-app/
-├── index.html        ← Estrutura HTML e estados da UI
+├── index.html
+├── .gitignore              ← impede a chave de subir ao GitHub
 ├── css/
-│   └── style.css     ← Todo o design e responsividade
+│   └── style.css
 └── js/
-    ├── api.js        ← Fetch, tratamento de erros, formatação dos dados
-    ├── ui.js         ← Manipulação do DOM (mostrar/esconder/preencher)
-    └── main.js       ← Eventos do usuário, orquestra api.js ↔ ui.js
+    ├── config.js           ← SUA chave (não vai pro GitHub)
+    ├── config.example.js   ← modelo de config (vai pro GitHub)
+    ├── api.js              ← fetch + tratamento de erros
+    ├── ui.js               ← manipulação do DOM
+    └── main.js             ← eventos e orquestração
 ```
 
 ---
@@ -35,94 +37,41 @@ weather-app/
 ## Como rodar localmente
 
 ### Pré-requisitos
-- [VS Code](https://code.visualstudio.com/)
-- Extensão **Live Server** instalada no VS Code
+- [VS Code](https://code.visualstudio.com/) com a extensão **Live Server**
 
-### Passo 1 — Clonar o repositório
-
+### Passo 1 — Clonar
 ```bash
 git clone https://github.com/SEU_USUARIO/weather-app.git
 cd weather-app
 ```
 
-### Passo 2 — Obter a chave da API (gratuita)
+### Passo 2 — Configurar a chave
+1. Pegue sua chave gratuita em [openweathermap.org/api](https://openweathermap.org/api)
+2. Copie `js/config.example.js` e renomeie a cópia para `js/config.js`
+3. Cole sua chave dentro de `config.js`
 
-1. Acesse [openweathermap.org](https://openweathermap.org) e crie uma conta gratuita
-2. Vá em **API Keys** no seu perfil
-3. Copie a chave gerada (pode levar até 10 minutos para ativar)
-
-### Passo 3 — Configurar a chave
-
-Abra `js/api.js` e substitua:
-
-```javascript
-const API_KEY = 'SUA_CHAVE_AQUI';
-```
-
-pela sua chave real:
-
-```javascript
-const API_KEY = 'a1b2c3d4e5f6789abcdef1234567890'; // exemplo
-```
-
-### Passo 4 — Abrir no navegador
-
-No VS Code, clique com o botão direito no `index.html` → **"Open with Live Server"**
+### Passo 3 — Rodar
+Botão direito no `index.html` → **Open with Live Server**
 
 ---
 
-## Deploy no Cloudflare Pages (gratuito)
+## Deploy no Cloudflare Pages
 
-### Passo 1 — Subir para o GitHub
+> Como a chave fica fora do repositório, configure-a no Cloudflare como variável de ambiente, OU mantenha um `config.js` local apenas para testes. Para um portfólio simples, a chave gratuita da OpenWeather pode ser usada com restrição de domínio no painel da OpenWeather.
 
-```bash
-# Na primeira vez
-git init
-git add .
-git commit -m "feat: projeto weather app concluído"
-git branch -M main
-git remote add origin https://github.com/SEU_USUARIO/weather-app.git
-git push -u origin main
-
-# Nas próximas atualizações
-git add .
-git commit -m "fix: descrição da mudança"
-git push
-```
-
-### Passo 2 — Conectar ao Cloudflare Pages
-
-1. Acesse [pages.cloudflare.com](https://pages.cloudflare.com) e faça login
-2. Clique em **"Create a project"** → **"Connect to Git"**
-3. Selecione o repositório `weather-app`
-4. Em **"Build settings"**:
-   - Framework preset: **None**
-   - Build command: *(deixe vazio)*
-   - Build output directory: `/` ou *(deixe vazio)*
-5. Clique em **"Save and Deploy"**
-
-Em 1-2 minutos seu site estará no ar em uma URL como:
-`https://weather-app-abc.pages.dev`
-
-### Passo 3 — Atualizações automáticas
-
-A partir de agora, todo `git push` atualiza o site automaticamente. Sem precisar fazer nada no Cloudflare.
+1. Suba o projeto para o GitHub (veja abaixo)
+2. Em [pages.cloudflare.com](https://pages.cloudflare.com) → **Create project** → **Connect to Git**
+3. Selecione o repositório → Framework preset: **None** → build vazio
+4. **Save and Deploy**
 
 ---
 
 ## Tecnologias
 
-| Tecnologia | Uso |
-|---|---|
-| HTML5 | Estrutura semântica |
-| CSS3 | Design, Grid, variáveis, animações |
-| JavaScript ES6+ | Fetch API, async/await, módulos |
-| OpenWeatherMap API | Dados de clima em tempo real |
-| GitHub | Versionamento |
-| Cloudflare Pages | Hospedagem e deploy contínuo |
+HTML5 · CSS3 · JavaScript ES6+ · OpenWeatherMap API · GitHub · Cloudflare Pages
 
 ---
 
 ## Autora
 
-**Romilda Millar** — [github.com/romildamillar](https://github.com/romildamillar) · [LinkedIn](#)
+**Romilda Millar** — [github.com/romildamillar](https://github.com/romildamillar)
